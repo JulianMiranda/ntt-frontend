@@ -1,7 +1,9 @@
+@import 'Colors.css';
+
 .header {
-	background-color: white;
+	background-color: var(--white-color);
 	padding: 20px 0;
-	color: #54648e;
+	color: var(--text-color);
 }
 
 .header-container {
@@ -17,7 +19,7 @@
 	display: flex;
 	align-items: center;
 	text-decoration: none;
-	color: #54648e;
+	color: var(--text-color);
 	position: relative;
 }
 
@@ -30,8 +32,8 @@
 .header-icon-background {
 	width: 15px;
 	height: 10px;
-	background-color: #fff;
-	border: 3px solid #54648e;
+	background-color: var(--white-color);
+	border: 3px solid var(--text-color);
 	border-radius: 5px;
 	position: absolute;
 	top: -5px;
@@ -44,16 +46,16 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: white;
-	border: 3px solid #54648e;
+	background-color: var(--white-color);
+	border: 3px solid var(--text-color);
 	border-radius: 5px;
 	position: relative;
-	box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.9);
+	box-shadow: 1px 1px 10px var(--white-shadow-color);
 }
 
 .header-plus {
 	font-size: 16px;
-	color: #54648e;
+	color: var(--text-color);
 	font-weight: bolder;
 }
 

@@ -1,6 +1,8 @@
+@import 'Colors.css';
+
 .product-list {
 	padding: 50px;
-	background-color: #f4f4f4;
+	background-color: var(--accent-color);
 }
 
 .actions {
@@ -12,14 +14,14 @@
 
 .actions input {
 	padding: 10px;
-	border: 1px solid #ccc;
+	border: 1px solid var(--border-color);
 	border-radius: 5px;
 	width: 200px;
 }
 
 .actions button {
-	background-color: #eed306;
-	color: #54648e;
+	background-color: var(--primary-color);
+	color: var(--text-color);
 	border: none;
 	padding: 15px 20px;
 	border-radius: 3px;
@@ -28,13 +30,13 @@
 }
 
 .actions button:hover {
-	background-color: #fcdd00;
+	background-color: var(--primary-color);
 }
 
 .table-wrapper {
-	background-color: #fff;
+	background-color: var(--white-color);
 	padding: 20px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 5px var(--accent-color);
 	margin-bottom: 20px;
 	position: relative;
 	min-height: 300px;
@@ -58,7 +60,7 @@ tbody td {
 }
 
 thead {
-	background-color: #fafbfc;
+	background-color: var(--table-head-color);
 }
 thead th {
 	padding: 10px 15px;
@@ -68,7 +70,7 @@ th,
 td {
 	padding: 10px 15px;
 	text-align: left;
-	border-bottom: 1px solid #f3f3f3;
+	border-bottom: 2px solid var(--table-line-color);
 	border-right: none;
 	border-left: none;
 }
@@ -120,7 +122,7 @@ td.actions-column {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #cacfdc;
+	background-color: var(--image-background-color);
 	margin: 0 auto;
 }
 
@@ -128,11 +130,11 @@ td.actions-column {
 	width: 45px;
 	height: 45px;
 	border-radius: 50%;
-	background-color: #cacfdc;
+	background-color: var(--image-background-color);
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: #fafbfc;
+	color: var(--table-head-color);
 	font-size: 20px;
 	font-weight: bold;
 }
@@ -159,16 +161,14 @@ td.actions-column {
 	display: none;
 	position: absolute;
 	right: 0;
-
-	background-color: #f9f9f9;
+	background-color: var(--table-head-color);
 	min-width: 160px;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-
+	box-shadow: 0px 3px 16px 0px var(--image-background-color);
 	z-index: 1000;
 }
 
 .dropdown-content button {
-	color: black;
+	color: var(--black-color);
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
@@ -179,7 +179,7 @@ td.actions-column {
 }
 
 .dropdown-content button:hover {
-	background-color: #f1f1f1;
+	background-color: var(--table-line-color);
 }
 
 .show {
@@ -202,8 +202,8 @@ tbody tr:last-child td {
 	height: 16px;
 	margin-left: 5px;
 	border-radius: 50%;
-	background-color: #a1a2a6;
-	color: white;
+	background-color: var(--icon-background-color);
+	color: var(--white-color);
 	text-align: center;
 	line-height: 16px;
 	font-size: 12px;
@@ -218,8 +218,8 @@ tbody tr:last-child td {
 	left: 50%;
 	transform: translateX(-50%);
 	transform: translateY(100%);
-	background-color: #333;
-	color: #fff;
+	background-color: var(--text-input-color);
+	color: var(--white-color);
 	padding: 5px 10px;
 	border-radius: 5px;
 	white-space: nowrap;
@@ -227,7 +227,7 @@ tbody tr:last-child td {
 	visibility: hidden;
 	transition: opacity 0.3s;
 	z-index: 9999;
-	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 4px 8px var(--icon-background-color);
 }
 
 .info-icon:hover::after {
@@ -241,40 +241,18 @@ tbody tr:last-child td {
 }
 
 .product-item {
-	background-color: #ffffff;
+	background-color: var(--white-color);
 	border-radius: 10px;
 	padding: 20px;
 	margin-bottom: 20px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.product-actions {
-	display: flex;
-	justify-content: space-between;
-}
-
-.product-actions a,
-.product-actions button {
-	color: #007bff;
-	text-decoration: none;
-	background: none;
-	border: none;
-	cursor: pointer;
-}
-
-.product-actions button {
-	color: #dc3545;
-}
-
-.product-actions button:hover {
-	color: #c82333;
+	box-shadow: 0 0 10px var(--shadow-color);
 }
 
 .actions select {
 	padding: 10px;
-	border: 1px solid #ccc;
+	border: 1px solid var(--image-background-color);
 	border-radius: 5px;
-	background-color: #ffffff;
+	background-color: var(--white-color);
 }
 
 .result {
@@ -286,11 +264,11 @@ tbody tr:last-child td {
 }
 select {
 	padding: 5px 10px;
-	border: 1px solid #ccc;
+	border: 1px solid var(--image-background-color);
 	border-radius: 5px;
-	background-color: #ffffff;
-	color: #3a3a3a;
+	background-color: var(--white-color);
+	color: var(--text-input-color);
 }
 option {
-	color: #3a3a3a;
+	color: var(--text-input-color);
 }
