@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useForm, SubmitHandler} from 'react-hook-form';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 import {useFormValidations} from '../hooks/useFormValidations';
 import Notification from './Notification';
 import '../styles/ProductForm.css';
-import {Product} from './ProductList';
 
 interface ProductFormProps {
 	id?: string;
@@ -20,14 +20,6 @@ interface IFormInputs {
 }
 
 const ProductForm: React.FC<ProductFormProps> = ({id}) => {
-	const [product, setProduct] = useState<Product>({
-		id: '',
-		name: '',
-		description: '',
-		logo: '',
-		date_release: '',
-		date_revision: ''
-	});
 	const {checkIdExists, validateReleaseDate, validateReviewDate} =
 		useFormValidations();
 	const {
@@ -45,6 +37,7 @@ const ProductForm: React.FC<ProductFormProps> = ({id}) => {
 	const [responseMessage, setResponseMessage] = useState<string | null>(null);
 	const [showNotification, setShowNotification] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (id) {
@@ -53,14 +46,7 @@ const ProductForm: React.FC<ProductFormProps> = ({id}) => {
 				.get(`http://localhost:3002/bp/products/${id}`)
 				.then((response) => {
 					const productData = response.data;
-					setProduct({
-						id: productData.id,
-						name: productData.name,
-						description: productData.description,
-						logo: productData.logo,
-						date_release: productData.date_release,
-						date_revision: productData.date_revision
-					});
+
 					setValue('id', productData.id);
 					setValue('name', productData.name);
 					setValue('description', productData.description);
@@ -155,6 +141,11 @@ const ProductForm: React.FC<ProductFormProps> = ({id}) => {
 
 	return (
 		<div className="product-form-container">
+			<div className="back-button-container">
+				<button className="back-button" onClick={() => navigate(`/`)}>
+					Home
+				</button>
+			</div>
 			{showNotification && responseMessage && (
 				<Notification
 					message={responseMessage}
@@ -195,12 +186,12 @@ const ProductForm: React.FC<ProductFormProps> = ({id}) => {
 						{...register('name', {
 							required: 'Nombre es requerido',
 							minLength: {
-								value: 5,
-								message: 'Nombre debe tener al menos 5 caracteres'
+								value: 6,
+								message: 'Debe tener al menos 6 caracteres'
 							},
 							maxLength: {
 								value: 100,
-								message: 'Nombre no puede tener más de 100 caracteres'
+								message: 'No puede tener más de 100 caracteres'
 							}
 						})}
 					/>
@@ -217,11 +208,11 @@ const ProductForm: React.FC<ProductFormProps> = ({id}) => {
 							required: 'Descripción es requerida',
 							minLength: {
 								value: 10,
-								message: 'Descripción debe tener al menos 10 caracteres'
+								message: 'Debe tener al menos 10 caracteres'
 							},
 							maxLength: {
 								value: 200,
-								message: 'Descripción no puede tener más de 200 caracteres'
+								message: 'No puede tener más de 200 caracteres'
 							}
 						})}
 					/>
@@ -257,7 +248,9 @@ const ProductForm: React.FC<ProductFormProps> = ({id}) => {
 					)}
 				</div>
 				<div className={errors.reviewDate ? 'error' : ''}>
-					<label htmlFor="reviewDate">Fecha de Revisión</label>
+					<label className="label-review-date" htmlFor="reviewDate">
+						Fecha de Revisión
+					</label>
 					<input
 						type="date"
 						id="reviewDate"
@@ -272,7 +265,7 @@ const ProductForm: React.FC<ProductFormProps> = ({id}) => {
 					)}
 				</div>
 				<div className="button-container full-width">
-					<button type="button" onClick={handleReset}>
+					<button className="button-reset" type="button" onClick={handleReset}>
 						Reiniciar
 					</button>
 					<button

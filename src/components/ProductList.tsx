@@ -153,7 +153,7 @@ const ProductList: React.FC = () => {
 			<div className="actions">
 				<input
 					type="text"
-					placeholder="Buscar..."
+					placeholder="Search..."
 					value={searchTerm}
 					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
@@ -195,7 +195,7 @@ const ProductList: React.FC = () => {
 										ℹ
 									</span>
 								</th>
-								<th className="actions-column">Acciones</th>
+								<th className="actions-column"> </th>
 							</tr>
 						</thead>
 						<tbody>
@@ -256,10 +256,13 @@ const ProductList: React.FC = () => {
 						</tbody>
 					</table>
 				</div>
-				<div className="actions">
-					<span>{filteredProducts.length} Resultados</span>
+				<div className="result">
+					<label htmlFor="resultCountSelect">
+						{filteredProducts.length} Resultados
+					</label>
 					<select
-						value={resultCount}
+						id="resultCountSelect"
+						value={resultCount.toString()}
 						onChange={(e) => setResultCount(Number(e.target.value))}
 					>
 						<option value="5">5</option>

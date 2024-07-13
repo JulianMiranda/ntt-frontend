@@ -60,6 +60,9 @@ tbody td {
 thead {
 	background-color: #fafbfc;
 }
+thead th {
+	padding: 10px 15px;
+}
 
 th,
 td {
@@ -110,8 +113,8 @@ td.actions-column {
 
 .image-container {
 	position: relative;
-	width: 50px;
-	height: 50px;
+	width: 45px;
+	height: 45px;
 	border-radius: 50%;
 	overflow: hidden;
 	display: flex;
@@ -122,15 +125,15 @@ td.actions-column {
 }
 
 .image-placeholder {
-	width: 50px;
-	height: 50px;
+	width: 45px;
+	height: 45px;
 	border-radius: 50%;
 	background-color: #cacfdc;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	color: #fafbfc;
-	font-size: 24px;
+	font-size: 20px;
 	font-weight: bold;
 }
 
@@ -184,8 +187,9 @@ td.actions-column {
 }
 
 tr {
-	border-right: none;
 	border-left: none;
+	border-left: none;
+	height: 10px;
 }
 
 tbody tr:last-child td {
@@ -271,4 +275,22 @@ tbody tr:last-child td {
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	background-color: #ffffff;
+}
+
+.result {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+	padding: 10 15px;
+}
+select {
+	padding: 5px 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #ffffff;
+	color: #3a3a3a;
+}
+option {
+	color: #3a3a3a;
 }

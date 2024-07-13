@@ -1,5 +1,5 @@
 .product-form-container {
-	padding: 50px;
+	padding: 0px;
 	background-color: #fff;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
@@ -43,9 +43,32 @@
 	margin: 30px 0 10px 0;
 }
 
+.back-button-container {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.back-button {
+	background-color: #edeff4;
+	color: #54648e;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 4px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+	background-color: #d4d6dc;
+}
+
 .product-form div {
 	flex: 1 1 calc(50% - 20px);
 	min-width: calc(50% - 20px);
+	position: relative;
 }
 
 .product-form label {
@@ -63,6 +86,12 @@
 	margin: 5px 0;
 	border: 1px solid #ddd;
 	border-radius: 4px;
+	color: #626262;
+}
+.product-form input[name='reviewDate'] {
+	color: rgba(98, 98, 98, 0.25); /* Color de letra más claro */
+	background-color: rgba(237, 239, 244, 0.8); /* Fondo más opaco */
+	border: none;
 }
 
 .product-form .error input[type='text'],
@@ -74,13 +103,15 @@
 	color: red;
 	margin-top: 5px;
 	font-size: 12px;
+	position: absolute; /* Cambiado a posición absoluta */
+	top: 90%; /* Ajusta según sea necesario */
 }
 
 .product-form button {
 	width: 20%;
 	padding: 15px 20px;
 	margin: 5px;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 700;
 	cursor: pointer;
 	border: none;
@@ -88,7 +119,7 @@
 	transition: background-color 0.3s ease;
 }
 
-button[type='reset'] {
+.button-reset {
 	background-color: #edeff4;
 	color: #54648e;
 }
@@ -122,4 +153,10 @@ button[type='reset'] {
 	font-size: 14px;
 	text-align: center;
 	margin-top: 20px;
+}
+label {
+	margin-top: 10px;
+}
+.product-form .label-review-date {
+	color: rgba(98, 98, 98, 0.4);
 }
