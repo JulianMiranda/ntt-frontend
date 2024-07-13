@@ -36,6 +36,7 @@
 	background-color: var(--accent-color);
 	margin: 80px auto 0;
 }
+
 .modal-actions {
 	display: flex;
 	width: 100%;
@@ -65,4 +66,39 @@
 
 .confirm-button:hover {
 	background-color: var(--primary-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+	.modal {
+		padding: 15px;
+	}
+	.modal p {
+		padding: 0 15px;
+		font-size: 14px;
+	}
+	.cancel-button,
+	.confirm-button {
+		padding: 10px 20px;
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 576px) {
+	.modal {
+		padding: 10px;
+	}
+	.modal p {
+		padding: 0 10px;
+		font-size: 12px;
+	}
+	.cancel-button,
+	.confirm-button {
+		padding: 8px 15px;
+		font-size: 12px;
+	}
+	.modal-actions {
+		flex-direction: column;
+		gap: 10px;
+	}
 }

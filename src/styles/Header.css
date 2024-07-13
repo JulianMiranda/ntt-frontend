@@ -63,3 +63,20 @@
 	margin: 0 15px;
 	font-size: 24px;
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+	.header {
+		padding: 15px 0;
+	}
+	.header-container {
+		padding: 0 10px;
+	}
+	.header-icon-container {
+		margin-right: 5px;
+	}
+	.header-title {
+		font-size: 20px;
+		margin: 0 10px;
+	}
+}

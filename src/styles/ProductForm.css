@@ -89,6 +89,7 @@
 	border-radius: 4px;
 	color: var(--text-input-color);
 }
+
 .product-form input[name='reviewDate'] {
 	color: var(--shadow-color);
 	background-color: var(--input-background-color);
@@ -155,9 +156,66 @@
 	text-align: center;
 	margin-top: 20px;
 }
+
 label {
 	margin-top: 10px;
 }
+
 .product-form .label-review-date {
 	color: var(--shadow-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+	.product-form-container {
+		padding: 0 15px;
+		margin: 20px auto;
+	}
+	.product-form-header h1 {
+		font-size: 20px;
+		padding: 15px;
+	}
+	.product-form {
+		padding: 0px 15px 15px 15px;
+		gap: 10px;
+	}
+	.product-form div {
+		flex: 1 1 100%;
+		min-width: 100%;
+	}
+	.product-form button {
+		width: 40%;
+		padding: 10px 15px;
+		font-size: 12px;
+	}
+	.button-container {
+		gap: 20px;
+	}
+}
+
+@media (max-width: 576px) {
+	.product-form-container {
+		padding: 0 10px;
+		margin: 10px auto;
+	}
+	.product-form-header h1 {
+		font-size: 18px;
+		padding: 10px;
+	}
+	.product-form {
+		padding: 0px 10px 10px 10px;
+		gap: 5px;
+	}
+	.product-form div {
+		flex: 1 1 100%;
+		min-width: 100%;
+	}
+	.product-form button {
+		width: 45%;
+		padding: 8px 10px;
+		font-size: 10px;
+	}
+	.button-container {
+		gap: 10px;
+	}
 }
