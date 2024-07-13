@@ -1,0 +1,17 @@
+.skeleton {
+	background-color: #e0e0e0;
+	border-radius: 4px;
+	margin: 10px 0;
+}
+
+.skeleton-line {
+	height: 20px;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.skeleton-circle {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+}

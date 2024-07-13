@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../styles/ProductList.css';
 import Notification from './Notification';
 import ConfirmModal from './ConfirmDeleteModal';
+import Skeleton from './Skeleton';
 
 export interface Product {
 	id: string;
@@ -14,11 +15,12 @@ export interface Product {
 	date_revision: string;
 }
 
-const ProductList: React.FC = () => {
+const ProductList: React.FC = React.memo(() => {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [searchTerm, setSearchTerm] = useState('');
 	const [resultCount, setResultCount] = useState(5);
 	const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+	const [loading, setLoading] = useState(true);
 	const [notification, setNotification] = useState<{
 		message: string;
 		type: 'success' | 'error';
@@ -40,9 +42,10 @@ const ProductList: React.FC = () => {
 				}
 			} catch (error) {
 				console.error('Error fetching products:', error);
+			} finally {
+				setLoading(false);
 			}
 		};
-
 		fetchProducts();
 	}, []);
 
@@ -199,60 +202,85 @@ const ProductList: React.FC = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{filteredProducts.slice(0, resultCount).map((product) => (
-								<tr key={product.id}>
-									<td className="logo-column">
-										<div className="image-container">
-											<img
-												src={product.logo}
-												alt={product.name}
-												className="product-logo"
-												onError={(e) => handleImageError(e, product.name)}
-											/>
-										</div>
-									</td>
-									<td className="name-column">{product.name}</td>
-									<td className="description-column">{product.description}</td>
-									<td className="release-date-column">
-										{product.date_release}
-									</td>
-									<td className="restructure-date-column">
-										{product.date_revision}
-									</td>
-									<td className="actions-column">
-										<div
-											className="dropdown"
-											ref={(el) => {
-												if (el) {
-													dropdownRefs.current.set(product.id, el);
-												} else {
-													dropdownRefs.current.delete(product.id);
-												}
-											}}
-										>
-											<button
-												className="dropbtn"
-												onClick={() => toggleDropdown(product.id)}
-											>
-												⋮
-											</button>
-											{activeDropdown === product.id && (
-												<div
-													id={`dropdown-${product.id}`}
-													className="dropdown-content show"
-												>
-													<button onClick={() => handleEdit(product.id)}>
-														Editar
-													</button>
-													<button onClick={() => openModal(product)}>
-														Eliminar
-													</button>
+							{loading
+								? Array.from({length: 5}).map((_, index) => (
+										<tr key={index}>
+											<td>
+												<Skeleton type="circle" />
+											</td>
+											<td>
+												<Skeleton type="line" width="80%" />
+											</td>
+											<td>
+												<Skeleton type="line" width="90%" />
+											</td>
+											<td>
+												<Skeleton type="line" width="70%" />
+											</td>
+											<td>
+												<Skeleton type="line" width="70%" />
+											</td>
+											<td>
+												<Skeleton type="line" width="30%" />
+											</td>
+										</tr>
+								  ))
+								: filteredProducts.slice(0, resultCount).map((product) => (
+										<tr key={product.id}>
+											<td className="logo-column">
+												<div className="image-container">
+													<img
+														src={product.logo}
+														alt={product.name}
+														className="product-logo"
+														onError={(e) => handleImageError(e, product.name)}
+													/>
 												</div>
-											)}
-										</div>
-									</td>
-								</tr>
-							))}
+											</td>
+											<td className="name-column">{product.name}</td>
+											<td className="description-column">
+												{product.description}
+											</td>
+											<td className="release-date-column">
+												{product.date_release}
+											</td>
+											<td className="restructure-date-column">
+												{product.date_revision}
+											</td>
+											<td className="actions-column">
+												<div
+													className="dropdown"
+													ref={(el) => {
+														if (el) {
+															dropdownRefs.current.set(product.id, el);
+														} else {
+															dropdownRefs.current.delete(product.id);
+														}
+													}}
+												>
+													<button
+														className="dropbtn"
+														onClick={() => toggleDropdown(product.id)}
+													>
+														⋮
+													</button>
+													{activeDropdown === product.id && (
+														<div
+															id={`dropdown-${product.id}`}
+															className="dropdown-content show"
+														>
+															<button onClick={() => handleEdit(product.id)}>
+																Editar
+															</button>
+															<button onClick={() => openModal(product)}>
+																Eliminar
+															</button>
+														</div>
+													)}
+												</div>
+											</td>
+										</tr>
+								  ))}
 						</tbody>
 					</table>
 				</div>
@@ -273,6 +301,6 @@ const ProductList: React.FC = () => {
 			</div>
 		</div>
 	);
-};
+});
 
 export default ProductList;
