@@ -8,7 +8,6 @@ api.interceptors.request.use(
 	async (config) => {
 		if (config.headers) {
 			config.headers['Content-Type'] = 'application/json';
-			config.headers['Authorization'] = 'Bearer YOUR_AUTH_TOKEN'; // Si necesitas un token de autenticación
 		}
 		return config;
 	},

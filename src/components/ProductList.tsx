@@ -25,7 +25,7 @@ const ProductList: React.FC = React.memo(() => {
 	const [notification, setNotification] = useState<{
 		message: string;
 		type: 'success' | 'error';
-		key: string;
+		notificationKey: string;
 	} | null>(null);
 	const [showModal, setShowModal] = useState(false);
 	const [productToDelete, setProductToDelete] = useState<Product | null>(null);
@@ -47,7 +47,7 @@ const ProductList: React.FC = React.memo(() => {
 					setNotification({
 						message: 'Error en el backend: Habilitar CORS',
 						type: 'error',
-						key: new Date().toISOString()
+						notificationKey: new Date().toISOString()
 					});
 				} else {
 					console.error('Error fetching products:', error);
@@ -95,7 +95,7 @@ const ProductList: React.FC = React.memo(() => {
 					setNotification({
 						message: response.data.message,
 						type: 'success',
-						key: new Date().toISOString()
+						notificationKey: new Date().toISOString()
 					});
 				})
 				.catch((err) => {
@@ -103,7 +103,7 @@ const ProductList: React.FC = React.memo(() => {
 					setNotification({
 						message: 'Error al eliminar el producto',
 						type: 'error',
-						key: new Date().toISOString()
+						notificationKey: new Date().toISOString()
 					});
 				});
 		} catch (error) {
@@ -111,7 +111,7 @@ const ProductList: React.FC = React.memo(() => {
 			setNotification({
 				message: 'Error al eliminar el producto',
 				type: 'error',
-				key: new Date().toISOString()
+				notificationKey: new Date().toISOString()
 			});
 		}
 		setShowModal(false);
@@ -154,7 +154,7 @@ const ProductList: React.FC = React.memo(() => {
 				<Notification
 					message={notification.message}
 					type={notification.type}
-					key={notification.key}
+					notificationKey={notification.notificationKey}
 				/>
 			)}
 			<ConfirmModal

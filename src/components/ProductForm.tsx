@@ -153,7 +153,7 @@ const ProductForm: React.FC<ProductFormProps> = ({id}) => {
 				<Notification
 					message={responseMessage}
 					type={responseMessage.includes('successfully') ? 'success' : 'error'}
-					key={new Date().toISOString()}
+					notificationKey={new Date().toISOString()}
 				/>
 			)}
 			<div className="product-form-header">

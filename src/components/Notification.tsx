@@ -4,12 +4,16 @@ import '../styles/Notification.css';
 interface NotificationProps {
 	message: string;
 	type: 'success' | 'error';
-	key: string;
+	notificationKey: string;
 }
 
-const Notification: React.FC<NotificationProps> = ({message, type, key}) => {
+const Notification: React.FC<NotificationProps> = ({
+	message,
+	type,
+	notificationKey
+}) => {
 	return (
-		<div className={`notification ${type}`} key={key}>
+		<div className={`notification ${type}`} key={notificationKey}>
 			<p>{message}</p>
 		</div>
 	);

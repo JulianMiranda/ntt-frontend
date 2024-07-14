@@ -12,7 +12,7 @@ import Header from './components/Header';
 
 const App: React.FC = () => {
 	return (
-		<Router>
+		<div>
 			<Header />
 			<Routes>
 				<Route path="/" element={<Home />} />
@@ -20,7 +20,7 @@ const App: React.FC = () => {
 				<Route path="/edit-product/:id" element={<EditProduct />} />
 				<Route path="*" element={<Navigate to="/" />} />
 			</Routes>
-		</Router>
+		</div>
 	);
 };
 
