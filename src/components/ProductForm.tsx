@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import {useFormValidations} from '../hooks/useFormValidations';
 import Notification from './Notification';
 import '../styles/ProductForm.css';
+import api from '../api/api';
 
 interface ProductFormProps {
 	id?: string;
@@ -20,7 +21,7 @@ interface IFormInputs {
 }
 
 const ProductForm: React.FC<ProductFormProps> = ({id}) => {
-	const {checkIdExists, validateReleaseDate, validateReviewDate} =
+	const {serverErr, checkIdExists, validateReleaseDate, validateReviewDate} =
 		useFormValidations();
 	const {
 		register,
@@ -40,10 +41,18 @@ const ProductForm: React.FC<ProductFormProps> = ({id}) => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		if (serverErr) {
+			setResponseMessage('Server erorr: Habilitar CORS');
+
+			setShowNotification(true);
+		}
+	}, [serverErr]);
+
+	useEffect(() => {
 		if (id) {
 			setIsEditing(true);
-			axios
-				.get(`http://localhost:3002/bp/products/${id}`)
+			api
+				.get(`/products/${id}`)
 				.then((response) => {
 					const productData = response.data;
 
@@ -72,25 +81,19 @@ const ProductForm: React.FC<ProductFormProps> = ({id}) => {
 
 		try {
 			if (isEditing) {
-				const response = await axios.put(
-					`http://localhost:3002/bp/products/${id}`,
-					body,
-					{headers: {'Content-Type': 'application/json'}}
-				);
+				const response = await api.put(`/products/${id}`, body);
 				setResponseMessage(response.data.message);
 			} else {
-				const response = await axios.post(
-					'http://localhost:3002/bp/products',
-					body,
-					{headers: {'Content-Type': 'application/json'}}
-				);
+				const response = await api.post('/products', body, {
+					headers: {'Content-Type': 'application/json'}
+				});
 				setResponseMessage(response.data.message);
 				reset();
 			}
 			setShowNotification(true);
 		} catch (error) {
 			if (axios.isAxiosError(error)) {
-				console.error('Error response from server:', error.response?.data);
+				console.error('Error response from server: ', error.response?.data);
 				setResponseMessage(
 					error.response?.data.message || 'Error al enviar el formulario'
 				);

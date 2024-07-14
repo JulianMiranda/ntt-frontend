@@ -5,6 +5,7 @@ import '../styles/ProductList.css';
 import Notification from './Notification';
 import ConfirmModal from './ConfirmDeleteModal';
 import Skeleton from './Skeleton';
+import api from '../api/api';
 
 export interface Product {
 	id: string;
@@ -28,20 +29,29 @@ const ProductList: React.FC = React.memo(() => {
 	} | null>(null);
 	const [showModal, setShowModal] = useState(false);
 	const [productToDelete, setProductToDelete] = useState<Product | null>(null);
+
 	const navigate = useNavigate();
 	const dropdownRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
 	useEffect(() => {
 		const fetchProducts = async () => {
 			try {
-				const response = await axios.get('http://localhost:3002/bp/products');
+				const response = await api.get('/products');
 				if (Array.isArray(response.data.data)) {
 					setProducts(response.data.data);
 				} else {
 					console.error('Expected an array but got:', response.data.data);
 				}
 			} catch (error) {
-				console.error('Error fetching products:', error);
+				if (axios.isAxiosError(error)) {
+					setNotification({
+						message: 'Error en el backend: Habilitar CORS',
+						type: 'error',
+						key: new Date().toISOString()
+					});
+				} else {
+					console.error('Error fetching products:', error);
+				}
 			} finally {
 				setLoading(false);
 			}
@@ -73,8 +83,8 @@ const ProductList: React.FC = React.memo(() => {
 
 	const handleDelete = async (id: string) => {
 		try {
-			axios
-				.delete(`http://localhost:3002/bp/products/${id}`)
+			api
+				.delete(`/products/${id}`)
 				.then((response) => {
 					console.log(response);
 
@@ -108,7 +118,7 @@ const ProductList: React.FC = React.memo(() => {
 		setProductToDelete(null);
 		setTimeout(() => {
 			setNotification(null);
-		}, 4000);
+		}, 3000);
 	};
 	const handleImageError = (
 		event: React.SyntheticEvent<HTMLImageElement, Event>,

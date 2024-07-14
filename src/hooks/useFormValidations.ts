@@ -1,19 +1,23 @@
-import {useCallback} from 'react';
+import {useCallback, useState} from 'react';
+import api from '../api/api';
 import axios from 'axios';
 export const useFormValidations = () => {
+	const [serverErr, setServerErr] = useState(false);
 	const checkIdExists = useCallback(async (value: string) => {
 		try {
 			if (!value) {
 				return;
 			}
-			const response = await axios.get(
-				`http://localhost:3002/bp/products/verification/${value}`
-			);
+			const response = await api.get(`/products/verification/${value}`);
 			if (response.status !== 200) {
 				throw new Error('Network response was not ok');
 			}
 			return response.data === true ? 'ID ya existe' : true;
 		} catch (error) {
+			if (axios.isAxiosError(error)) {
+				console.error('Error response from server: ', error.response?.data);
+				setServerErr(true);
+			}
 			console.error('Error checking ID:', error);
 			return 'Error verificando el ID';
 		}
@@ -49,9 +53,5 @@ export const useFormValidations = () => {
 		[]
 	);
 
-	return {
-		checkIdExists,
-		validateReleaseDate,
-		validateReviewDate
-	};
+	return {serverErr, checkIdExists, validateReleaseDate, validateReviewDate};
 };
